@@ -146,30 +146,86 @@ body {
     line-height: 1.4;
 }
 
-/* Страница view.html */
+/* Компактный и красивый контейнер для просмотра заметки */
 .main {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
+    max-width: 600px; /* Сделали уже, чтобы текст не растягивался на весь экран */
+    margin: 40px auto;
+    padding: 0 20px;
+    width: 100%;
 }
 
 .inpu {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #f0f6fc;
     background: #161b22;
     border: 1px solid #30363d;
-    padding: 16px 20px;
+    padding: 14px 18px;
     border-radius: 10px;
 }
 
 .textar {
     background: #161b22;
     border: 1px solid #30363d;
-    padding: 20px;
+    padding: 18px;
     border-radius: 12px;
-    min-height: 350px;
+    min-height: 200px; /* Уменьшили высоту, чтобы не было слишком пусто */
+    max-height: 450px; /* Ограничили максимальную высоту с прокруткой */
+    overflow-y: auto;
     color: #e6edf3;
     line-height: 1.6;
     white-space: pre-wrap;
+}
+
+/* Красивая кнопка назад с классом .back */
+.back {
+    background: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    align-self: flex-start; /* Чтобы кнопка была аккуратной по размеру текста */
+}
+
+.back:hover {
+    background: #30363d;
+    border-color: #8b949e;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.donatele {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Чтобы она всегда была поверх любого контента */
+    background: linear-gradient(135deg, #8957e5, #bf40bf);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(137, 87, 229, 0.3);
+}
+
+.donatele:hover {
+    background: linear-gradient(135deg, #9360f7, #cf4acf);
+    box-shadow: 0 6px 16px rgba(137, 87, 229, 0.5);
+    transform: translateY(-2px);
 }
