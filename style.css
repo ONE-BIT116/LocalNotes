@@ -4,15 +4,23 @@
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-
-body {
-    background-color: #0d1117;
-    color: #e6edf3;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --card-bg: #f9f9f9;
 }
 
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --card-bg: #1e1e1e;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.2s, color 0.2s; /* Плавный переход, чтобы глазам было комфортно */
+}
 /* Общие контейнеры */
 .main-container, .container {
     max-width: 800px;
@@ -228,4 +236,50 @@ body {
     background: linear-gradient(135deg, #9360f7, #cf4acf);
     box-shadow: 0 6px 16px rgba(137, 87, 229, 0.5);
     transform: translateY(-2px);
+}
+.github-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #c9d1d9;
+  background: #21262d;
+  border: 1px solid #30363d;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.github-btn:hover {
+  background: #30363d;
+  color: #ffffff;
+  border-color: #8b949e;
+  transform: translateY(-2px);
+}
+
+/* Кнопка смены темы (сдвигаем левее кнопки Donate, чтобы они не дрались за место) */
+.theme-btn {
+  position: fixed;
+  top: 20px;
+  right: 115px; /* Аккуратно встанет слева от фиолетовой кнопки доната */
+  z-index: 1000;
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+  background: #30363d;
+  color: #ffffff;
+  border-color: #8b949e;
+  transform: translateY(-2px);
 }
