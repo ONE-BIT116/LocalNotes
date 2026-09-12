@@ -4,6 +4,7 @@
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
 :root {
   --bg-color: #ffffff;
   --text-color: #333333;
@@ -19,9 +20,9 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background 0.2s, color 0.2s; /* Плавный переход, чтобы глазам было комфортно */
+  transition: background 0.2s, color 0.2s;
 }
-/* Общие контейнеры */
+
 .main-container, .container {
     max-width: 800px;
     width: 100%;
@@ -33,7 +34,6 @@ body {
     gap: 20px;
 }
 
-/* Баннер на главной */
 .banner {
     background: linear-gradient(135deg, #1f6feb, #388bfd);
     color: #ffffff;
@@ -48,7 +48,6 @@ body {
     letter-spacing: -0.5px;
 }
 
-/* Инпуты и текстарии */
 .zagolovok {
     width: 100%;
     background: #161b22;
@@ -95,7 +94,6 @@ body {
     transition: all 0.2s ease;
 }
 
-/* Кнопки */
 .create, .view, .btn {
     background: #238636;
     color: #ffffff;
@@ -117,7 +115,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Сетка карточек на странице notes.html */
 .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -154,12 +151,11 @@ body {
     line-height: 1.4;
 }
 
-/* Компактный и красивый контейнер для просмотра заметки */
 .main {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    max-width: 600px; /* Сделали уже, чтобы текст не растягивался на весь экран */
+    max-width: 600px;
     margin: 40px auto;
     padding: 0 20px;
     width: 100%;
@@ -180,15 +176,14 @@ body {
     border: 1px solid #30363d;
     padding: 18px;
     border-radius: 12px;
-    min-height: 200px; /* Уменьшили высоту, чтобы не было слишком пусто */
-    max-height: 450px; /* Ограничили максимальную высоту с прокруткой */
+    min-height: 200px;
+    max-height: 450px;
     overflow-y: auto;
     color: #e6edf3;
     line-height: 1.6;
     white-space: pre-wrap;
 }
 
-/* Красивая кнопка назад с классом .back */
 .back {
     background: #21262d;
     color: #c9d1d9;
@@ -202,7 +197,7 @@ body {
     text-decoration: none;
     display: inline-block;
     transition: all 0.2s ease;
-    align-self: flex-start; /* Чтобы кнопка была аккуратной по размеру текста */
+    align-self: flex-start;
 }
 
 .back:hover {
@@ -216,7 +211,7 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1000; /* Чтобы она всегда была поверх любого контента */
+    z-index: 1000;
     background: linear-gradient(135deg, #8957e5, #bf40bf);
     color: #ffffff;
     border: none;
@@ -237,49 +232,136 @@ body {
     box-shadow: 0 6px 16px rgba(137, 87, 229, 0.5);
     transform: translateY(-2px);
 }
+
 .github-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 8px 16px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #c9d1d9;
-  background: #21262d;
-  border: 1px solid #30363d;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  z-index: 1000;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #c9d1d9;
+    background: #21262d;
+    border: 1px solid #30363d;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    z-index: 1000;
 }
 
 .github-btn:hover {
-  background: #30363d;
-  color: #ffffff;
-  border-color: #8b949e;
-  transform: translateY(-2px);
+    background: #30363d;
+    color: #ffffff;
+    border-color: #8b949e;
+    transform: translateY(-2px);
 }
 
-/* Кнопка смены темы (сдвигаем левее кнопки Donate, чтобы они не дрались за место) */
 .theme-btn {
-  position: fixed;
-  top: 20px;
-  right: 115px; /* Аккуратно встанет слева от фиолетовой кнопки доната */
-  z-index: 1000;
-  background: #21262d;
-  border: 1px solid #30363d;
-  color: #c9d1d9;
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    position: fixed;
+    top: 20px;
+    right: 115px;
+    z-index: 1000;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .theme-btn:hover {
-  background: #30363d;
-  color: #ffffff;
-  border-color: #8b949e;
-  transform: translateY(-2px);
+    background: #30363d;
+    color: #ffffff;
+    border-color: #8b949e;
+    transform: translateY(-2px);
+}
+
+.inpuuu {
+    width: 100%;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f0f6fc;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.inpuuu:focus {
+    border-color: #1f6feb;
+    box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.2);
+}
+
+.textarrr {
+    background: #161b22;
+    border: 1px solid #30363d;
+    padding: 18px;
+    border-radius: 12px;
+    min-height: 200px;
+    max-height: 450px;
+    overflow-y: auto;
+    color: #e6edf3;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.textarrr:focus {
+    border-color: #1f6feb;
+    box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.2);
+}
+
+.confirm-btn {
+    background: #238636;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 28px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.confirm-btn:hover {
+    background: #2ea043;
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
+    transform: translateY(-2px);
+}
+
+.editing {
+    background: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.editing:hover {
+    background: #30363d;
+    border-color: #8b949e;
+    color: #ffffff;
+    transform: translateY(-2px);
 }
