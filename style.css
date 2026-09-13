@@ -6,21 +6,81 @@
 }
 
 :root {
-  --bg-color: #ffffff;
+  --bg-color: #f8f9fa;
   --text-color: #333333;
-  --card-bg: #f9f9f9;
+  --card-bg: #ffffff;
+  --bg-size: 24px 24px;
 }
 
 [data-theme="dark"] {
-  --bg-color: #121212;
+  --bg-color: #0d1117;
   --text-color: #e0e0e0;
-  --card-bg: #1e1e1e;
+  --card-bg: #161b22;
 }
 
+/* Очищаем старые картинки фона для темной темы */
+[data-theme="dark"] body {
+  background-image: none;
+}
+
+/* Создаем слой со звездами через тени */
+[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+
+    box-shadow: 
+        /* 1. Белые звезды (жесткий центр) */
+        15vw 10vh 0 #fff, 
+        45vw 25vh 0 rgba(255, 255, 255, 0.8), 
+        80vw 15vh 0 #8ab4f8, 
+        25vw 50vh 0 rgba(255, 255, 255, 0.9), 
+        60vw 40vh 0 #fff, 
+        90vw 55vh 0 rgba(138, 180, 248, 0.7), 
+        10vw 80vh 0 #fff, 
+        35vw 70vh 0 rgba(255, 255, 255, 0.6), 
+        75vw 85vh 0 #fff, 
+        5vw 35vh 0 rgba(255, 255, 255, 0.7), 
+        50vw 90vh 0 #fff, 
+        88vw 30vh 0 rgba(255, 255, 255, 0.8), 
+        20vw 20vh 0 #fff, 
+        70vw 75vh 0 rgba(138, 180, 248, 0.9), 
+        40vw 45vh 0 #fff,
+
+        /* 2. Сильное объемное свечение вокруг этих звезд */
+        15vw 10vh 25px #fff, 
+        45vw 25vh 35px rgba(255, 255, 255, 0.8), 
+        80vw 15vh 35px #8ab4f8, 
+        25vw 50vh 35px rgba(255, 255, 255, 1), 
+        60vw 40vh 30px #fff, 
+        90vw 55vh 40px rgba(138, 180, 248, 0.7), 
+        10vw 80vh 25px #fff, 
+        35vw 70vh 35px rgba(255, 255, 255, 0.6), 
+        75vw 85vh 30px #fff, 
+        5vw 35vh 30px rgba(255, 255, 255, 0.7), 
+        50vw 90vh 30px #fff, 
+        88vw 30vh 35px rgba(255, 255, 255, 0.8), 
+        20vw 20vh 25px #fff, 
+        70vw 75vh 40px rgba(138, 180, 248, 1), 
+        40vw 45vh 25px #fff;
+
+
+  border-radius: 50%;
+  z-index: -1; /* Чтобы звезды были строго под контентом и не мешали кликать */
+  pointer-events: none;
+}
 body {
   background-color: var(--bg-color);
+  background-image: var(--bg-pattern);
+  background-size: var(--bg-size);
+  /* Разные смещения для каждого слоя создают полный хаос вместо сетки */
+  background-position: 0 0, 45px 60px, 20px 90px; 
   color: var(--text-color);
-  transition: background 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, background-image 0.2s;
 }
 
 .main-container, .container {
@@ -364,4 +424,31 @@ body {
     border-color: #8b949e;
     color: #ffffff;
     transform: translateY(-2px);
+}
+
+.del-btn {
+    background: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.del-btn:hover {
+    background: #30363d;
+    border-color: #8b949e;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.margin {
+    margin: 15px;
 }

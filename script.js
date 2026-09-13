@@ -181,4 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const deleteButton = document.getElementById('delete-btn');
+    const index = Number(new URLSearchParams(window.location.search).get('index'));
+    const notes = getNotes()
+
+    if (deleteButton)  {
+        deleteButton.addEventListener('click', () => {
+            notes.splice(index, 1);
+            saveNotes(notes);
+            window.location.href = 'index.html';
+        });
+    }
 });
