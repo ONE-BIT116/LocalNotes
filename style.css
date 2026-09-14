@@ -18,12 +18,10 @@
   --card-bg: #161b22;
 }
 
-/* Очищаем старые картинки фона для темной темы */
 [data-theme="dark"] body {
   background-image: none;
 }
 
-/* Создаем слой со звездами через тени */
 [data-theme="dark"] body::before {
   content: "";
   position: fixed;
@@ -34,7 +32,6 @@
   background: transparent;
 
     box-shadow: 
-        /* 1. Белые звезды (жесткий центр) */
         15vw 10vh 0 #fff, 
         45vw 25vh 0 rgba(255, 255, 255, 0.8), 
         80vw 15vh 0 #8ab4f8, 
@@ -70,14 +67,13 @@
 
 
   border-radius: 50%;
-  z-index: -1; /* Чтобы звезды были строго под контентом и не мешали кликать */
+  z-index: -1;
   pointer-events: none;
 }
 body {
   background-color: var(--bg-color);
   background-image: var(--bg-pattern);
   background-size: var(--bg-size);
-  /* Разные смещения для каждого слоя создают полный хаос вместо сетки */
   background-position: 0 0, 45px 60px, 20px 90px; 
   color: var(--text-color);
   transition: background-color 0.2s, color 0.2s, background-image 0.2s;

@@ -1,6 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const NOTES_KEY = 'local_notes';
 
+    const toggleBtn = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (toggleBtn) {
+        toggleBtn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+        toggleBtn.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    }
+
     function getNotes() {
         return JSON.parse(localStorage.getItem(NOTES_KEY)) || [];
     }
@@ -20,12 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/[&<>"']/g, m => map[m]);
     }
 
-    // ============================================================
-    // 1. СТРАНИЦА СОЗДАНИЯ (create.html)
-    //    поля: .zagolovok (заголовок), #text (текст), .view (кнопка)
-    // ============================================================
+    const notesGrid = document.getElementById('notes-grid');
     const createBtn = document.querySelector('.view');
     const createTitleInput = document.querySelector('.zagolovok');
+
+    const blacklist = ['create.html', 'view.html', 'edit.html'];
+    const isBlacklisted = blacklist.some(page => window.location.pathname.endsWith(page));
+
+    const isIndexPage = !isBlacklisted && !notesGrid && (createBtn || createTitleInput || window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/'));
+
+    if (isIndexPage) {
+        const initialNotes = getNotes();
+        if (Array.isArray(initialNotes) && initialNotes.length > 0) {
+            window.location.href = 'notes.html';
+            return;
+        }
+    }
 
     if (createBtn && createTitleInput) {
         createBtn.addEventListener('click', (e) => {
@@ -50,12 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'notes.html';
         });
     }
-
-    // ============================================================
-    // 2. СПИСОК ЗАМЕТОК (notes.html)
-    //    контейнер: #notes-grid
-    // ============================================================
-    const notesGrid = document.getElementById('notes-grid');
 
     if (notesGrid) {
         const notes = getNotes();
@@ -83,11 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ============================================================
-    // 3. ПРОСМОТР ЗАМЕТКИ (view.html)
-    //    поля: #input (заголовок), #textarea (текст)
-    //    ссылка редактирования: <a class="editing" href="edit.html">
-    // ============================================================
     const viewInput = document.getElementById('input');
     const viewTextarea = document.getElementById('textarea');
 
@@ -100,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
             viewInput.textContent = notes[index].title;
             viewTextarea.textContent = notes[index].body;
 
-            // Подставляем правильный индекс в ссылку Edit
             const editLink = document.querySelector('.editing');
             if (editLink) {
                 editLink.href = `edit.html?index=${index}`;
@@ -111,11 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ============================================================
-    // 4. РЕДАКТИРОВАНИЕ ЗАМЕТКИ (edit.html)
-    //    поля: #inputtt (заголовок), #textareaaa (текст)
-    //    кнопка: .confirm-btn
-    // ============================================================
     const inputTitle = document.getElementById('inputtt');
     const textBody = document.getElementById('textareaaa');
     const confirmBtn = document.querySelector('.confirm-btn');
@@ -154,42 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ============================================================
-    // 5. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ (работает на любой странице)
-    // ============================================================
-    const toggleBtn = document.getElementById('theme-toggle');
-
-    if (toggleBtn) {
-        const currentTheme = localStorage.getItem('theme') || 'light';
-
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            toggleBtn.textContent = '☀️';
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            const theme = document.documentElement.getAttribute('data-theme');
-
-            if (theme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                toggleBtn.textContent = '🌙';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                toggleBtn.textContent = '☀️';
-            }
-        });
-    }
-
     const deleteButton = document.getElementById('delete-btn');
-    const index = Number(new URLSearchParams(window.location.search).get('index'));
-    const notes = getNotes()
 
-    if (deleteButton)  {
+    if (deleteButton) {
+        const index = Number(new URLSearchParams(window.location.search).get('index'));
+        const notesToDelete = getNotes();
+
         deleteButton.addEventListener('click', () => {
-            notes.splice(index, 1);
-            saveNotes(notes);
+            notesToDelete.splice(index, 1);
+            saveNotes(notesToDelete);
             window.location.href = 'index.html';
         });
     }
